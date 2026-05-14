@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { ConvexProvider, ConvexReactClient } from "convex/react";
+import { ConvexProvider, ConvexReactClient } from "convex/react"
 
-// Remplacez par votre URL de production Convex fournie dans votre dashboard
+// On récupère l'URL que tu as mise dans Vercel
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
