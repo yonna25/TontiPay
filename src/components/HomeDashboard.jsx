@@ -1,40 +1,33 @@
 import React from 'react';
-import { TrendingUp, AlertCircle, ArrowUpRight } from 'lucide-react';
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
+import { TrendingUp, ArrowUpRight } from 'lucide-react';
 
-const HomeDashboard = () => (
-  <div className="space-y-6 animate-in fade-in duration-500">
-    <header className="py-4">
-      <h1 className="text-2xl font-bold">Bonjour, Marie</h1>
-      <p className="text-gray-500">TontiPay est à jour</p>
-    </header>
+const HomeDashboard = () => {
+  // On appelle la base de données
+  const tontine = useQuery(api.tontine.getTontineInfo);
 
-    <div className="bg-[oklch(0.20_0.04_45)] text-white p-6 rounded-[2.5rem] shadow-xl">
-      <div className="flex justify-between">
-        <div>
-          <p className="text-[10px] uppercase opacity-60">Ma Fiabilité</p>
-          <div className="flex items-center gap-2">
-            <span className="text-3xl font-black text-[oklch(0.55_0.16_145)]">97%</span>
-            <TrendingUp size={18} className="text-[oklch(0.55_0.16_145)]" />
-          </div>
-        </div>
+  // Si ça charge, on affiche un petit message
+  if (tontine === undefined) return <div className="p-10 text-center">Connexion...</div>;
+
+  return (
+    <div className="p-4 space-y-6">
+      <div className="bg-black text-white p-6 rounded-[2rem]">
+        <p className="text-sm opacity-70 italic">À verser ce mois-ci :</p>
+        <h2 className="text-4xl font-bold">
+          {tontine?.contributionAmount?.toLocaleString() || "0"} 
+          <span className="text-orange-400 ml-2 text-xl">FCFA</span>
+        </h2>
+        <button className="w-full mt-6 bg-orange-500 py-3 rounded-xl font-bold">
+          Payer maintenant
+        </button>
       </div>
-      <div className="mt-8">
-        <p className="text-sm opacity-70">À verser ce mois-ci :</p>
-        <h2 className="text-4xl font-black italic">25.000 <span className="text-sm text-orange-400">FCFA</span></h2>
-      </div>
-      <button className="w-full mt-6 bg-[oklch(0.62_0.19_45)] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2">
-        Payer maintenant <ArrowUpRight size={18} />
-      </button>
+      
+      <p className="text-center text-gray-400 text-sm">
+        Groupe : {tontine?.name}
+      </p>
     </div>
-
-    <div className="bg-white border-2 border-orange-100 p-5 rounded-[2rem] flex items-start gap-4">
-      <AlertCircle className="text-[oklch(0.62_0.19_45)]" />
-      <div>
-        <h3 className="font-bold">Prochain Pot</h3>
-        <p className="text-sm text-gray-500">Tour de Fatou Bamba le 15 Mai.</p>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 export default HomeDashboard;
