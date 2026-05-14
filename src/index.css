@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* Vos couleurs officielles pour une commerçante "Nana Benz" */
+  --color-primary: oklch(0.62 0.19 45);     /* Orange Action */
+  --color-success: oklch(0.55 0.16 145);    /* Vert Fiabilité */
+  --color-brand-dark: oklch(0.20 0.04 45);  /* Brun Nuit Prestige */
+  --color-bg-warm: oklch(0.99 0.005 80);    /* Blanc Chaud Confort */
+  --color-text-main: oklch(0.18 0.025 50);  /* Texte lisible */
+}
+
+/* Reset de base pour l'expérience mobile */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-main);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: initial;
+  min-width: 320px;
+  min-height: 100vh;
+  /* Empêche le rebond du scroll sur mobile pour une sensation "App Native" */
+  overscroll-behavior-y: none; 
+}
