@@ -4,7 +4,7 @@ import App from './App'
 import './index.css'
 import { ConvexProvider, ConvexReactClient } from "convex/react"
 
-// On récupère l'URL que tu as mise dans Vercel
+// Connexion via l'URL configurée dans Vercel
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
